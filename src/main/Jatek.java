@@ -4,6 +4,8 @@
  */
 package main;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 public class Jatek extends javax.swing.JFrame {
@@ -19,7 +21,7 @@ public class Jatek extends javax.swing.JFrame {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        lblLeiras = new javax.swing.JLabel();
         Btn1_1 = new javax.swing.JButton();
         Btn1_2 = new javax.swing.JButton();
         Btn1_3 = new javax.swing.JButton();
@@ -36,8 +38,8 @@ public class Jatek extends javax.swing.JFrame {
         Btn4_2 = new javax.swing.JButton();
         Btn4_3 = new javax.swing.JButton();
         Btn4_4 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        lblKivalaszt = new javax.swing.JLabel();
+        lblLepesSzam = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -52,7 +54,7 @@ public class Jatek extends javax.swing.JFrame {
         setTitle("Logikai játék");
         setResizable(false);
 
-        jLabel1.setText("Válaszd ki az egyik oszlop legfelső elemét!");
+        lblLeiras.setText("Válaszd ki az egyik oszlop legfelső elemét!");
 
         Btn1_2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kepek/kek.png"))); // NOI18N
         Btn1_2.addActionListener(new java.awt.event.ActionListener() {
@@ -93,9 +95,9 @@ public class Jatek extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Kiválasztva: -");
+        lblKivalaszt.setText("Kiválasztva: -");
 
-        jLabel3.setText("Lépések száma: 0");
+        lblLepesSzam.setText("Lépések száma: 0");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -128,9 +130,9 @@ public class Jatek extends javax.swing.JFrame {
                             .addComponent(Btn4_2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(Btn4_3, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(Btn4_4, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
+                    .addComponent(lblLeiras)
+                    .addComponent(lblKivalaszt)
+                    .addComponent(lblLepesSzam))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -140,7 +142,7 @@ public class Jatek extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(lblLeiras)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -178,9 +180,9 @@ public class Jatek extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(Btn2_4)))))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel2)
+                .addComponent(lblKivalaszt)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel3)
+                .addComponent(lblLepesSzam)
                 .addContainerGap(10, Short.MAX_VALUE))
         );
 
@@ -244,36 +246,69 @@ public class Jatek extends javax.swing.JFrame {
     JButton gomb = null;
     String aktiv = "";
     int klikk = 0;
+    private void setAktivSzin(JButton button) {
+        Icon icon = button.getIcon();
+        if (icon instanceof ImageIcon) {
+            String path = ((ImageIcon) icon).toString();
+            if (path.contains("zold.png")) {
+                aktiv = "z";
+            } else if (path.contains("piros.png")) {
+                aktiv = "p";
+            } else if (path.contains("kek.png")) {
+                aktiv = "k";
+            } else {
+                aktiv = "?";
+            }
+        }
+    }
+    private String karakterSzinne(String karakter){
+        switch (karakter) {
+            case "k":
+                return "kék";
+            case "p":
+                return "piros";
+            case "z":
+                return "zöld";   
+        }
+        return "?";
+    }
+    private void kiirasok() {
+        lblLeiras.setText("Jelöld, hogy hova rakod!");
+        lblKivalaszt.setText("Kiválasztva: "+karakterSzinne(aktiv));
+        lblLepesSzam.setText("Lépések száma: " + klikk);
+    }  
     //gomb elnevezés: oszlop,sor
     private void Btn1_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn1_2ActionPerformed
-        aktiv = "k";//ezt le kell kérdezni, kép alapján!
         gomb = Btn1_2;
-        jLabel1.setText("Jelöld, hogy hova rakod!");
-        jLabel2.setText("Kiválsztva: kék");
-        klikk++; //klikk += 1
-        jLabel3.setText("Lépések száéma: " + klikk);
+        setAktivSzin(gomb);
+        kiirasok();
+        klikk++; //klikk += 1  
     }//GEN-LAST:event_Btn1_2ActionPerformed
 
     private void Btn2_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn2_2ActionPerformed
-        aktiv = "z";//ezt le kell kérdezni, kép alapján!
         gomb = Btn2_2;
-        jLabel1.setText("Jelöld, hogy hova rakod!");
-        jLabel2.setText("Kiválsztva: zöld");
-        klikk++;
-        jLabel3.setText("Lépések száéma: " + klikk);
+        setAktivSzin(gomb);
+        kiirasok();
+        klikk++; //klikk += 1  
     }//GEN-LAST:event_Btn2_2ActionPerformed
 
     private void Btn3_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn3_2ActionPerformed
-        aktiv = "p";//ezt le kell kérdezni, kép alapján!
         gomb = Btn3_2;
-        jLabel1.setText("Jelöld, hogy hova rakod!");
-        jLabel2.setText("Kiválsztva: piros");
-        klikk++;
-        jLabel3.setText("Lépések száéma: " + klikk);
+        setAktivSzin(gomb);
+        kiirasok();
+        klikk++; //klikk += 1  
     }//GEN-LAST:event_Btn3_2ActionPerformed
 
     private void Btn4_4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn4_4ActionPerformed
+        gomb = Btn4_4;
+        if (aktiv == "") {
+            setAktivSzin(gomb);
+        }
+        System.out.println(aktiv);
+        kiirasok();
+        klikk++; //klikk += 1  
         if(aktiv.equals("k")){
+            
             Btn4_4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kepek/kek.png")));
         }else if(aktiv.equals("z")){
             Btn4_4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kepek/zold.png")));
@@ -311,9 +346,6 @@ public class Jatek extends javax.swing.JFrame {
     private javax.swing.JButton Btn4_2;
     private javax.swing.JButton Btn4_3;
     private javax.swing.JButton Btn4_4;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
@@ -325,5 +357,8 @@ public class Jatek extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JLabel lblKivalaszt;
+    private javax.swing.JLabel lblLeiras;
+    private javax.swing.JLabel lblLepesSzam;
     // End of variables declaration//GEN-END:variables
 }
