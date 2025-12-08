@@ -10,9 +10,16 @@ import javax.swing.JButton;
 
 public class Jatek extends javax.swing.JFrame {
 
-    
+    public JButton[] oszlop1;
+    public JButton[] oszlop2;
+    public JButton[] oszlop3;
+    public JButton[] oszlop4;
     public Jatek() {
         initComponents();
+        oszlop1 = new JButton[]{Btn1_1,Btn1_2,Btn1_3,Btn1_4};
+        oszlop2 = new JButton[]{Btn2_1,Btn2_2,Btn2_3,Btn2_4};
+        oszlop3 = new JButton[]{Btn3_1,Btn3_2,Btn3_3,Btn3_4};
+        oszlop4 = new JButton[]{Btn4_1,Btn4_2,Btn4_3,Btn4_4};
     }
 
     @SuppressWarnings("unchecked")
@@ -56,6 +63,13 @@ public class Jatek extends javax.swing.JFrame {
 
         lblLeiras.setText("Válaszd ki az egyik oszlop legfelső elemét!");
 
+        Btn1_1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kepek/ures.png"))); // NOI18N
+        Btn1_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn1_1ActionPerformed(evt);
+            }
+        });
+
         Btn1_2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kepek/kek.png"))); // NOI18N
         Btn1_2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -66,6 +80,13 @@ public class Jatek extends javax.swing.JFrame {
         Btn1_3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kepek/piros.png"))); // NOI18N
 
         Btn1_4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kepek/zold.png"))); // NOI18N
+
+        Btn2_1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kepek/ures.png"))); // NOI18N
+        Btn2_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn2_1ActionPerformed(evt);
+            }
+        });
 
         Btn2_2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kepek/zold.png"))); // NOI18N
         Btn2_2.addActionListener(new java.awt.event.ActionListener() {
@@ -78,6 +99,8 @@ public class Jatek extends javax.swing.JFrame {
 
         Btn2_4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kepek/zold.png"))); // NOI18N
 
+        Btn3_1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kepek/ures.png"))); // NOI18N
+
         Btn3_2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kepek/piros.png"))); // NOI18N
         Btn3_2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,6 +112,13 @@ public class Jatek extends javax.swing.JFrame {
 
         Btn3_4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kepek/kek.png"))); // NOI18N
 
+        Btn4_1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kepek/ures.png"))); // NOI18N
+
+        Btn4_2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kepek/ures.png"))); // NOI18N
+
+        Btn4_3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kepek/ures.png"))); // NOI18N
+
+        Btn4_4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kepek/ures.png"))); // NOI18N
         Btn4_4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Btn4_4ActionPerformed(evt);
@@ -242,7 +272,10 @@ public class Jatek extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    
+    
+    
     JButton gomb = null;
     String aktiv = "";
     int klikk = 0;
@@ -301,7 +334,7 @@ public class Jatek extends javax.swing.JFrame {
 
     private void Btn4_4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn4_4ActionPerformed
         gomb = Btn4_4;
-        if (aktiv == "") {
+        if (aktiv.equals("")) {
             setAktivSzin(gomb);
         }
         System.out.println(aktiv);
@@ -316,8 +349,26 @@ public class Jatek extends javax.swing.JFrame {
             Btn4_4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kepek/piros.png")));
         }
         aktiv = "";
-        gomb.setIcon(null);
+        
     }//GEN-LAST:event_Btn4_4ActionPerformed
+
+    private void Btn1_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn1_1ActionPerformed
+        //oszlop1
+        gomb = Btn1_1;
+        if (gomb.getIcon().toString().equals("file:/C:/Users/F%c3%b3tiD%c3%a1vidB%c3%a1lint(SZF_/Documents/NetBeansProjects/LogikaiKemcso/build/classes/kepek/ures.png")) {
+            
+        }
+        for (int i = 0; i < oszlop1.length; i++) {
+            if (oszlop1[i] == gomb) {
+                
+            }
+        }
+        //if (aktiv.equals("") && true)
+    }//GEN-LAST:event_Btn1_1ActionPerformed
+
+    private void Btn2_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn2_1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Btn2_1ActionPerformed
 
 
     public static void main(String args[]) {
