@@ -14,14 +14,12 @@ public class Jatek extends javax.swing.JFrame {
     public JButton[] oszlop2;
     public JButton[] oszlop3;
     public JButton[] oszlop4;
+    public JButton[] oszlopok;
+    public int aktivindex = -1;
     public Jatek() {
         initComponents();
-        oszlop1 = new JButton[]{Btn1_1,Btn1_2,Btn1_3,Btn1_4};
-        oszlop2 = new JButton[]{Btn2_1,Btn2_2,Btn2_3,Btn2_4};
-        oszlop3 = new JButton[]{Btn3_1,Btn3_2,Btn3_3,Btn3_4};
-        oszlop4 = new JButton[]{Btn4_1,Btn4_2,Btn4_3,Btn4_4};
+        oszlopok = new JButton[]{Btn1_4,Btn1_3,Btn1_2,Btn1_1,Btn2_4,Btn2_3,Btn2_2,Btn2_1,Btn3_4,Btn3_3,Btn3_2,Btn3_1,Btn4_4,Btn4_3,Btn4_2,Btn4_1};
     }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -78,8 +76,18 @@ public class Jatek extends javax.swing.JFrame {
         });
 
         Btn1_3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kepek/piros.png"))); // NOI18N
+        Btn1_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn1_3ActionPerformed(evt);
+            }
+        });
 
         Btn1_4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kepek/zold.png"))); // NOI18N
+        Btn1_4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn1_4ActionPerformed(evt);
+            }
+        });
 
         Btn2_1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kepek/ures.png"))); // NOI18N
         Btn2_1.addActionListener(new java.awt.event.ActionListener() {
@@ -96,10 +104,25 @@ public class Jatek extends javax.swing.JFrame {
         });
 
         Btn2_3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kepek/piros.png"))); // NOI18N
+        Btn2_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn2_3ActionPerformed(evt);
+            }
+        });
 
         Btn2_4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kepek/zold.png"))); // NOI18N
+        Btn2_4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn2_4ActionPerformed(evt);
+            }
+        });
 
         Btn3_1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kepek/ures.png"))); // NOI18N
+        Btn3_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn3_1ActionPerformed(evt);
+            }
+        });
 
         Btn3_2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kepek/piros.png"))); // NOI18N
         Btn3_2.addActionListener(new java.awt.event.ActionListener() {
@@ -109,14 +132,39 @@ public class Jatek extends javax.swing.JFrame {
         });
 
         Btn3_3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kepek/kek.png"))); // NOI18N
+        Btn3_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn3_3ActionPerformed(evt);
+            }
+        });
 
         Btn3_4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kepek/kek.png"))); // NOI18N
+        Btn3_4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn3_4ActionPerformed(evt);
+            }
+        });
 
         Btn4_1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kepek/ures.png"))); // NOI18N
+        Btn4_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn4_1ActionPerformed(evt);
+            }
+        });
 
         Btn4_2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kepek/ures.png"))); // NOI18N
+        Btn4_2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn4_2ActionPerformed(evt);
+            }
+        });
 
         Btn4_3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kepek/ures.png"))); // NOI18N
+        Btn4_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn4_3ActionPerformed(evt);
+            }
+        });
 
         Btn4_4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kepek/ures.png"))); // NOI18N
         Btn4_4.addActionListener(new java.awt.event.ActionListener() {
@@ -272,26 +320,54 @@ public class Jatek extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
-    
-    
-    
+
     JButton gomb = null;
     String aktiv = "";
     int klikk = 0;
+    
+    private String getSzin(JButton button) {
+        Icon icon = button.getIcon();
+        String path = ((ImageIcon) icon).toString();
+        if (path.contains("zold.png")) {
+            return "z";
+        } else if (path.contains("piros.png")) {
+            return "p";
+        } else if (path.contains("kek.png")) {
+            return "k";
+        } else if (path.contains("ures.png")) {
+            return "";
+        }
+        return "?";
+    }
+    
     private void setAktivSzin(JButton button) {
         Icon icon = button.getIcon();
-        if (icon instanceof ImageIcon) {
-            String path = ((ImageIcon) icon).toString();
+        String path = ((ImageIcon) icon).toString();
+        boolean top = false;
+        for (int i = 0; i <= oszlopok.length - 1; i++) {
+            if (oszlopok[i] == button) {
+                if (i != 3 || i != 7 || i != 11 || i != 15) {
+                    if (getSzin(oszlopok[i + 1]).equals("")) {
+                        top = true;
+                    }
+                } else if (getSzin(oszlopok[i]).equals("")) {
+                    top = true;
+                }
+            }
+        }
+        if (top) {
             if (path.contains("zold.png")) {
                 aktiv = "z";
             } else if (path.contains("piros.png")) {
                 aktiv = "p";
             } else if (path.contains("kek.png")) {
                 aktiv = "k";
-            } else {
-                aktiv = "?";
+            } else if (path.contains("ures.png")) {
+                aktiv = "";
             }
+        }
+        if (!top) {
+            aktiv = "";
         }
     }
     private String karakterSzinne(String karakter){
@@ -301,7 +377,9 @@ public class Jatek extends javax.swing.JFrame {
             case "p":
                 return "piros";
             case "z":
-                return "zöld";   
+                return "zöld";
+            case "":
+                return "";
         }
         return "?";
     }
@@ -309,26 +387,73 @@ public class Jatek extends javax.swing.JFrame {
         lblLeiras.setText("Jelöld, hogy hova rakod!");
         lblKivalaszt.setText("Kiválasztva: "+karakterSzinne(aktiv));
         lblLepesSzam.setText("Lépések száma: " + klikk);
-    }  
+    }
+    
+    private void kepAllitas(JButton button) {
+        oszlopok[aktivindex].setIcon(button.getIcon());
+        switch (aktiv) {
+            case "k":
+                button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kepek/kek.png")));
+                break;
+            case "z":
+                button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kepek/zold.png")));
+                break;
+            case "p":
+                button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kepek/piros.png")));
+                break;
+            default:
+                break;
+        }
+        aktivindex = -1;
+        aktiv = "";
+    }
     //gomb elnevezés: oszlop,sor
     private void Btn1_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn1_2ActionPerformed
         gomb = Btn1_2;
-        setAktivSzin(gomb);
-        kiirasok();
+        if (aktiv.equals("")) {
+            setAktivSzin(gomb);
+            for (int i = 0;i <= oszlopok.length-1;i++) {
+                if (oszlopok[i] == gomb) {
+                    aktivindex = i;
+                }
+            }
+        }else {
+            kiirasok();
+            kepAllitas(gomb);
+        }
+        
         klikk++; //klikk += 1  
     }//GEN-LAST:event_Btn1_2ActionPerformed
 
     private void Btn2_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn2_2ActionPerformed
         gomb = Btn2_2;
-        setAktivSzin(gomb);
-        kiirasok();
+        if (aktiv.equals("")) {
+            setAktivSzin(gomb);
+            for (int i = 0;i <= oszlopok.length-1;i++) {
+                if (oszlopok[i] == gomb) {
+                    aktivindex = i;
+                }
+            }
+        }else {
+            kiirasok();
+            kepAllitas(gomb);
+        }
         klikk++; //klikk += 1  
     }//GEN-LAST:event_Btn2_2ActionPerformed
 
     private void Btn3_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn3_2ActionPerformed
         gomb = Btn3_2;
-        setAktivSzin(gomb);
-        kiirasok();
+        if (aktiv.equals("")) {
+            setAktivSzin(gomb);
+            for (int i = 0;i <= oszlopok.length-1;i++) {
+                if (oszlopok[i] == gomb) {
+                    aktivindex = i;
+                }
+            }
+        }else {
+            kiirasok();
+            kepAllitas(gomb);
+        }
         klikk++; //klikk += 1  
     }//GEN-LAST:event_Btn3_2ActionPerformed
 
@@ -336,39 +461,198 @@ public class Jatek extends javax.swing.JFrame {
         gomb = Btn4_4;
         if (aktiv.equals("")) {
             setAktivSzin(gomb);
+            for (int i = 0;i <= oszlopok.length-1;i++) {
+                if (oszlopok[i] == gomb) {
+                    aktivindex = i;
+                }
+            }
+        }else {
+            kiirasok();
+            kepAllitas(gomb);
         }
-        System.out.println(aktiv);
-        kiirasok();
         klikk++; //klikk += 1  
-        if(aktiv.equals("k")){
-            
-            Btn4_4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kepek/kek.png")));
-        }else if(aktiv.equals("z")){
-            Btn4_4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kepek/zold.png")));
-        }else if(aktiv.equals("p")){
-            Btn4_4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kepek/piros.png")));
-        }
-        aktiv = "";
-        
     }//GEN-LAST:event_Btn4_4ActionPerformed
 
     private void Btn1_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn1_1ActionPerformed
         //oszlop1
         gomb = Btn1_1;
-        if (gomb.getIcon().toString().equals("file:/C:/Users/F%c3%b3tiD%c3%a1vidB%c3%a1lint(SZF_/Documents/NetBeansProjects/LogikaiKemcso/build/classes/kepek/ures.png")) {
-            
-        }
-        for (int i = 0; i < oszlop1.length; i++) {
-            if (oszlop1[i] == gomb) {
-                
+        if (aktiv.equals("")) {
+            setAktivSzin(gomb);
+            for (int i = 0;i <= oszlopok.length-1;i++) {
+                if (oszlopok[i] == gomb) {
+                    aktivindex = i;
+                }
             }
+        }else {
+            kiirasok();
+            kepAllitas(gomb);
         }
-        //if (aktiv.equals("") && true)
     }//GEN-LAST:event_Btn1_1ActionPerformed
 
     private void Btn2_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn2_1ActionPerformed
-        // TODO add your handling code here:
+       gomb = Btn2_1;
+        if (aktiv.equals("")) {
+            setAktivSzin(gomb);
+            for (int i = 0;i <= oszlopok.length-1;i++) {
+                if (oszlopok[i] == gomb) {
+                    aktivindex = i;
+                }
+            }
+        }else {
+            kiirasok();
+            kepAllitas(gomb);
+        }
     }//GEN-LAST:event_Btn2_1ActionPerformed
+
+    private void Btn1_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn1_3ActionPerformed
+        gomb = Btn1_3;
+        if (aktiv.equals("")) {
+            setAktivSzin(gomb);
+            for (int i = 0;i <= oszlopok.length-1;i++) {
+                if (oszlopok[i] == gomb) {
+                    aktivindex = i;
+                }
+            }
+        }else {
+            kiirasok();
+            kepAllitas(gomb);
+        }
+    }//GEN-LAST:event_Btn1_3ActionPerformed
+
+    private void Btn1_4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn1_4ActionPerformed
+        gomb = Btn1_4;
+        if (aktiv.equals("")) {
+            setAktivSzin(gomb);
+            for (int i = 0;i <= oszlopok.length-1;i++) {
+                if (oszlopok[i] == gomb) {
+                    aktivindex = i;
+                }
+            }
+        }else {
+            kiirasok();
+            kepAllitas(gomb);
+        }
+    }//GEN-LAST:event_Btn1_4ActionPerformed
+
+    private void Btn2_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn2_3ActionPerformed
+        gomb = Btn2_3;
+        if (aktiv.equals("")) {
+            setAktivSzin(gomb);
+            for (int i = 0;i <= oszlopok.length-1;i++) {
+                if (oszlopok[i] == gomb) {
+                    aktivindex = i;
+                }
+            }
+        }else {
+            kiirasok();
+            kepAllitas(gomb);
+        }
+    }//GEN-LAST:event_Btn2_3ActionPerformed
+
+    private void Btn2_4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn2_4ActionPerformed
+        gomb = Btn2_4;
+        if (aktiv.equals("")) {
+            setAktivSzin(gomb);
+            for (int i = 0;i <= oszlopok.length-1;i++) {
+                if (oszlopok[i] == gomb) {
+                    aktivindex = i;
+                }
+            }
+        }else {
+            kiirasok();
+            kepAllitas(gomb);
+        }
+    }//GEN-LAST:event_Btn2_4ActionPerformed
+
+    private void Btn3_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn3_1ActionPerformed
+        gomb = Btn3_1;
+        if (aktiv.equals("")) {
+            setAktivSzin(gomb);
+            for (int i = 0;i <= oszlopok.length-1;i++) {
+                if (oszlopok[i] == gomb) {
+                    aktivindex = i;
+                }
+            }
+        }else {
+            kiirasok();
+            kepAllitas(gomb);
+        }
+    }//GEN-LAST:event_Btn3_1ActionPerformed
+
+    private void Btn3_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn3_3ActionPerformed
+        gomb = Btn3_3;
+        if (aktiv.equals("")) {
+            setAktivSzin(gomb);
+            for (int i = 0;i <= oszlopok.length-1;i++) {
+                if (oszlopok[i] == gomb) {
+                    aktivindex = i;
+                }
+            }
+        }else {
+            kiirasok();
+            kepAllitas(gomb);
+        }
+    }//GEN-LAST:event_Btn3_3ActionPerformed
+
+    private void Btn3_4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn3_4ActionPerformed
+        gomb = Btn3_4;
+        if (aktiv.equals("")) {
+            setAktivSzin(gomb);
+            for (int i = 0;i <= oszlopok.length-1;i++) {
+                if (oszlopok[i] == gomb) {
+                    aktivindex = i;
+                }
+            }
+        }else {
+            kiirasok();
+            kepAllitas(gomb);
+        }
+    }//GEN-LAST:event_Btn3_4ActionPerformed
+
+    private void Btn4_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn4_1ActionPerformed
+        gomb = Btn4_1;
+        if (aktiv.equals("")) {
+            setAktivSzin(gomb);
+            for (int i = 0;i <= oszlopok.length-1;i++) {
+                if (oszlopok[i] == gomb) {
+                    aktivindex = i;
+                }
+            }
+        }else {
+            kiirasok();
+            kepAllitas(gomb);
+        }
+    }//GEN-LAST:event_Btn4_1ActionPerformed
+
+    private void Btn4_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn4_2ActionPerformed
+        gomb = Btn4_2;
+        if (aktiv.equals("")) {
+            setAktivSzin(gomb);
+            for (int i = 0;i <= oszlopok.length-1;i++) {
+                if (oszlopok[i] == gomb) {
+                    aktivindex = i;
+                }
+            }
+        }else {
+            kiirasok();
+            kepAllitas(gomb);
+        }
+    }//GEN-LAST:event_Btn4_2ActionPerformed
+
+    private void Btn4_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn4_3ActionPerformed
+        gomb = Btn4_3;
+        if (aktiv.equals("")) {
+            setAktivSzin(gomb);
+            for (int i = 0;i <= oszlopok.length-1;i++) {
+                if (oszlopok[i] == gomb) {
+                    aktivindex = i;
+                }
+            }
+        }else {
+            kiirasok();
+            kepAllitas(gomb);
+        }
+    }//GEN-LAST:event_Btn4_3ActionPerformed
 
 
     public static void main(String args[]) {
